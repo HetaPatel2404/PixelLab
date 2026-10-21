@@ -6,6 +6,11 @@ import matplotlib.pyplot as plt
 from PIL import Image
 from io import BytesIO
 
+from modules.learning_content import (
+    render_learning_section,
+    render_learning_hub
+)
+
 from modules.image_fundamentals import (
     get_image_information,
     convert_color_space,
@@ -105,203 +110,21 @@ st.set_page_config(
 
 
 # =========================================================
-# PIXELLAB PREMIUM UI THEME
+# PIXELLAB PASTEL UI THEME
 # =========================================================
 
-st.markdown("""
-<style>
-/* ---------- GLOBAL BACKGROUND ---------- */
-.stApp {
-    background:
-        radial-gradient(
-            ellipse at 10% 0%,
-            rgba(124, 58, 237, 0.18),
-            transparent 38%
-        ),
-        radial-gradient(
-            ellipse at 95% 10%,
-            rgba(6, 182, 212, 0.12),
-            transparent 32%
-        ),
-        #0B1020;
-    color: #F1F5F9;
-}
+from pathlib import Path
 
-/* ---------- MAIN CONTENT ---------- */
-.block-container {
-    max-width: 1450px;
-    padding-top: 2.2rem;
-    padding-bottom: 3rem;
-}
+css_path = Path(__file__).parent / "assets" / "style.css"
 
-/* ---------- HEADINGS ---------- */
-h1 {
-    color: #FFFFFF !important;
-    font-weight: 850 !important;
-    letter-spacing: -1.5px;
-}
+if css_path.exists():
+    with open(css_path, "r", encoding="utf-8") as css_file:
+        pastel_css = css_file.read()
 
-h2, h3 {
-    color: #E9D5FF !important;
-    font-weight: 750 !important;
-}
-
-p, label, .stMarkdown {
-    color: #D5DCEF;
-}
-
-/* ---------- SIDEBAR ---------- */
-[data-testid="stSidebar"] {
-    background: linear-gradient(
-        180deg,
-        #15132B 0%,
-        #101729 55%,
-        #0B1020 100%
-    );
-    border-right: 1px solid rgba(167, 139, 250, 0.22);
-}
-
-[data-testid="stSidebar"] h1,
-[data-testid="stSidebar"] h2,
-[data-testid="stSidebar"] h3 {
-    color: #C4B5FD !important;
-}
-
-[data-testid="stSidebar"] label {
-    color: #E2E8F0 !important;
-}
-
-/* ---------- SELECTBOXES AND INPUTS ---------- */
-.stSelectbox [data-baseweb="select"] > div,
-.stTextInput input,
-.stNumberInput input {
-    background-color: #171D31;
-    color: #F8FAFC;
-    border-color: #39415E;
-    border-radius: 10px;
-}
-
-[data-testid="stFileUploader"] {
-    background: rgba(124, 58, 237, 0.08);
-    border: 1px dashed #8B5CF6;
-    border-radius: 16px;
-    padding: 12px;
-}
-
-[data-testid="stFileUploader"]:hover {
-    border-color: #22D3EE;
-}
-
-/* ---------- BUTTONS ---------- */
-.stButton > button,
-.stDownloadButton > button {
-    background: linear-gradient(
-        110deg,
-        #7C3AED,
-        #4F46E5 55%,
-        #0891B2
-    );
-    color: white !important;
-    border: 1px solid rgba(196, 181, 253, 0.35);
-    border-radius: 12px;
-    min-height: 44px;
-    font-weight: 700;
-    transition: all 0.2s ease;
-    box-shadow: 0 5px 18px rgba(79, 70, 229, 0.20);
-}
-
-.stButton > button:hover,
-.stDownloadButton > button:hover {
-    border-color: #67E8F9;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(34, 211, 238, 0.22);
-}
-
-/* ---------- METRICS ---------- */
-[data-testid="stMetric"] {
-    background: linear-gradient(
-        135deg,
-        rgba(124, 58, 237, 0.13),
-        rgba(8, 145, 178, 0.09)
-    );
-    border: 1px solid rgba(148, 163, 184, 0.20);
-    padding: 17px;
-    border-radius: 16px;
-}
-
-[data-testid="stMetricLabel"] {
-    color: #A5B4FC !important;
-}
-
-[data-testid="stMetricValue"] {
-    color: #67E8F9 !important;
-    font-weight: 800;
-}
-
-/* ---------- SLIDERS ---------- */
-.stSlider [data-baseweb="slider"] div[role="slider"] {
-    background: #22D3EE;
-    border-color: #22D3EE;
-}
-
-/* ---------- TABS ---------- */
-.stTabs [data-baseweb="tab-list"] {
-    gap: 10px;
-    border-bottom: 1px solid #303954;
-}
-
-.stTabs [data-baseweb="tab"] {
-    color: #C4B5FD;
-    border-radius: 10px 10px 0 0;
-}
-
-.stTabs [aria-selected="true"] {
-    color: #67E8F9 !important;
-}
-
-/* ---------- EXPANDERS ---------- */
-[data-testid="stExpander"] {
-    background: rgba(22, 28, 48, 0.72);
-    border: 1px solid rgba(139, 92, 246, 0.25);
-    border-radius: 14px;
-}
-
-/* ---------- IMAGE CARDS ---------- */
-[data-testid="stImage"] {
-    background: rgba(255, 255, 255, 0.025);
-    border-radius: 14px;
-    overflow: hidden;
-}
-
-/* ---------- DIVIDERS ---------- */
-hr {
-    border-color: rgba(148, 163, 184, 0.20) !important;
-}
-
-/* ---------- STATUS MESSAGES ---------- */
-[data-testid="stAlert"] {
-    border-radius: 12px;
-}
-
-/* ---------- FOOTER ---------- */
-footer {
-    visibility: hidden;
-}
-
-/* ---------- RESPONSIVE SPACING ---------- */
-@media (max-width: 768px) {
-    .block-container {
-        padding-top: 1.2rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-
-    h1 {
-        letter-spacing: -0.5px;
-    }
-}
-</style>
-""", unsafe_allow_html=True)
+    st.markdown(
+        f"<style>{pastel_css}</style>",
+        unsafe_allow_html=True
+    )
 
 
 st.title("🧪 PixelLab")
@@ -608,6 +431,7 @@ if page == "Overview":
     st.pyplot(fig)
     plt.close(fig)
 
+    render_learning_hub()
 
 # =========================================================
 # IMAGE FUNDAMENTALS
@@ -723,6 +547,7 @@ elif page == "Image Fundamentals":
 
         processed_image = resized
 
+    render_learning_section("Image Fundamentals")
 
 # =========================================================
 # ENHANCEMENT
@@ -831,6 +656,7 @@ elif page == "Enhancement":
         ("Original Image", operation),
     )
 
+    render_learning_section("Enhancement")
 
 # =========================================================
 # HISTOGRAM ANALYSIS
@@ -969,6 +795,7 @@ elif page == "Histogram Analysis":
                 ("Image 1", "Image 2"),
             )
 
+        render_learning_section("Histogram Analysis") 
 
 # =========================================================
 # FILTERS AND IMAGE RESTORATION
@@ -1191,6 +1018,7 @@ elif page == "Filters & Image Restoration":
             ("Original Image", operation),
         )
 
+        render_learning_section("Filters & Image Restoration")
 
 # =========================================================
 # FREQUENCY DOMAIN PROCESSING
@@ -1263,6 +1091,7 @@ elif page == "Frequency Domain Processing":
             ("Grayscale Input", operation),
         )
 
+    render_learning_section("Frequency Domain Processing")
 
 # =========================================================
 # EDGE DETECTION
@@ -1344,6 +1173,7 @@ elif page == "Edge Detection":
         ("Original Image", f"{operation} Edges"),
     )
 
+    render_learning_section("Edge Detection")
 
 # =========================================================
 # MORPHOLOGICAL OPERATIONS
@@ -1461,6 +1291,7 @@ elif page == "Morphological Operations":
         ("Original Image", operation),
     )
 
+    render_learning_section("Morphological Operations")
 
 # =========================================================
 # IMAGE SEGMENTATION
@@ -1539,6 +1370,7 @@ elif page == "Image Segmentation":
         ("Original Image", operation),
     )
 
+    render_learning_section("Image Segmentation")
 
 # =========================================================
 # FEATURE EXTRACTION
@@ -1665,6 +1497,7 @@ elif page == "Feature Extraction":
                     len(matches),
                 )
 
+    render_learning_section("Feature Extraction")
 
 # =========================================================
 # COMPRESSION AND QUALITY
@@ -1779,6 +1612,7 @@ elif page == "Compression & Quality":
         st.error(f"Compression failed: {error}")
         processed_image = original_image
 
+    render_learning_section("Compression & Quality")
 
 # =========================================================
 # SINGLE GLOBAL DOWNLOAD BUTTON

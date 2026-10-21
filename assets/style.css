@@ -1,0 +1,316 @@
+
+/* ==========================================
+   PIXELLAB — PASTEL EDITION
+   Soft • Elegant • Modern • Minimal
+========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --pink: #e9a8c5;
+    --pink-dark: #b9658c;
+    --pink-light: #fff0f6;
+    --lavender: #b9b0e8;
+    --lavender-light: #f1efff;
+    --sage: #a9cbb5;
+    --cream: #fffdf9;
+    --ink: #40384b;
+    --muted: #81778c;
+    --border: #eee5ee;
+    --white: #ffffff;
+}
+
+/* Main application */
+.stApp {
+    background:
+        radial-gradient(ellipse at 8% 0%, #fcebf3 0%, transparent 35%),
+        radial-gradient(ellipse at 95% 12%, #eeedff 0%, transparent 32%),
+        #fffdfb;
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+}
+
+/* Main content spacing */
+.block-container {
+    max-width: 1450px;
+    padding: 2.3rem 3rem 4rem;
+}
+
+/* Typography */
+h1, h2, h3, h4 {
+    font-family: 'Manrope', sans-serif !important;
+    color: var(--ink) !important;
+    letter-spacing: -0.7px;
+}
+
+h1 {
+    font-size: clamp(2rem, 4vw, 3rem) !important;
+    font-weight: 800 !important;
+}
+
+h2 {
+    font-size: 1.65rem !important;
+    font-weight: 750 !important;
+}
+
+h3 {
+    font-size: 1.2rem !important;
+    font-weight: 700 !important;
+}
+
+p, label, .stMarkdown {
+    line-height: 1.7;
+}
+
+/* Sidebar */
+[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #fff4f8 0%, #f6f2ff 55%, #f5fbf6 100%);
+    border-right: 1px solid #f0e5ef;
+}
+
+[data-testid="stSidebar"] > div:first-child {
+    padding: 1.5rem 1rem;
+}
+
+[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p {
+    color: #62566e;
+}
+
+/* Sidebar navigation */
+[data-testid="stSidebarNav"] {
+    padding-top: 1rem;
+}
+
+[data-testid="stSidebarNav"] a {
+    border-radius: 12px;
+    margin: 5px 0;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+[data-testid="stSidebarNav"] a:hover {
+    background: #f3e5f5;
+    transform: translateX(3px);
+}
+
+/* Buttons */
+.stButton > button,
+.stDownloadButton > button,
+[data-testid="stFormSubmitButton"] > button {
+    background: linear-gradient(135deg, #e8b1ca, #c5b8ed);
+    color: #49364e;
+    border: 1px solid #ead5ed;
+    border-radius: 13px;
+    padding: 0.62rem 1.2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    min-height: 43px;
+    box-shadow: 0 4px 12px rgba(185, 143, 190, 0.12);
+    transition: all 0.22s ease;
+}
+
+.stButton > button:hover,
+.stDownloadButton > button:hover,
+[data-testid="stFormSubmitButton"] > button:hover {
+    background: linear-gradient(135deg, #dfa0bd, #b5a7e7);
+    border-color: #d4b5dd;
+    color: #3e2d47;
+    box-shadow: 0 7px 18px rgba(166, 126, 182, 0.2);
+    transform: translateY(-2px);
+}
+
+.stButton > button:focus,
+.stDownloadButton > button:focus {
+    box-shadow: 0 0 0 3px #f2d8e8;
+}
+
+/* Inputs and select boxes */
+.stTextInput input,
+.stNumberInput input,
+.stTextArea textarea,
+.stSelectbox [data-baseweb="select"],
+.stMultiSelect [data-baseweb="select"] {
+    background: #ffffff;
+    border-radius: 12px;
+    border-color: #e8dce9;
+}
+
+.stTextInput input:focus,
+.stNumberInput input:focus,
+.stTextArea textarea:focus {
+    border-color: #c5a8df;
+    box-shadow: 0 0 0 2px #f0e5f7;
+}
+
+/* Sliders */
+.stSlider [data-baseweb="slider"] [role="slider"] {
+    background: #c89bcf;
+    border-color: #c89bcf;
+}
+
+/* Upload area */
+[data-testid="stFileUploader"] {
+    background: linear-gradient(135deg, #fff7fb, #f7f4ff);
+    border: 1.5px dashed #d9b9dc;
+    border-radius: 20px;
+    padding: 1rem;
+    transition: border-color 0.2s ease;
+}
+
+[data-testid="stFileUploader"]:hover {
+    border-color: #c18cc5;
+}
+
+[data-testid="stFileUploaderDropzone"] {
+    background: rgba(255, 255, 255, 0.7);
+    border: none;
+    border-radius: 14px;
+}
+
+/* Cards and containers */
+[data-testid="stVerticalBlockBorderWrapper"] {
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid #eee5ef;
+    border-radius: 20px;
+    box-shadow: 0 5px 22px rgba(108, 83, 116, 0.055);
+    padding: 0.5rem;
+}
+
+/* Images */
+[data-testid="stImage"] {
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+[data-testid="stImage"] img {
+    border-radius: 16px;
+}
+
+/* Tabs */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 8px;
+    background: #f8f3fa;
+    border-radius: 15px;
+    padding: 6px;
+}
+
+.stTabs [data-baseweb="tab"] {
+    border-radius: 11px;
+    padding: 10px 18px;
+    color: #74667f;
+    font-weight: 600;
+}
+
+.stTabs [aria-selected="true"] {
+    background: #ffffff !important;
+    color: #a45e8b !important;
+    box-shadow: 0 2px 8px rgba(100, 70, 110, 0.08);
+}
+
+/* Metrics */
+[data-testid="stMetric"] {
+    background: linear-gradient(145deg, #ffffff, #fff7fb);
+    border: 1px solid #f0e4ef;
+    border-radius: 17px;
+    padding: 1.1rem;
+    box-shadow: 0 4px 15px rgba(120, 88, 128, 0.05);
+}
+
+[data-testid="stMetricLabel"] {
+    color: #81728e;
+    font-weight: 600;
+}
+
+[data-testid="stMetricValue"] {
+    color: #a45e8b;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+}
+
+/* Expanders */
+[data-testid="stExpander"] {
+    border: 1px solid #eee3ef;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.72);
+    overflow: hidden;
+}
+
+[data-testid="stExpander"] summary {
+    font-weight: 600;
+    color: #65566f;
+}
+
+/* Alerts and messages */
+[data-testid="stAlert"] {
+    border-radius: 14px;
+    border: 1px solid #eee2f1;
+}
+
+/* Dataframes and tables */
+[data-testid="stDataFrame"],
+[data-testid="stTable"] {
+    border: 1px solid #eee5ef;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+/* Dividers */
+hr {
+    border-color: #eee4ee !important;
+    opacity: 0.9;
+}
+
+/* Captions */
+.stCaption, [data-testid="stCaptionContainer"] {
+    color: var(--muted);
+    font-size: 0.86rem;
+}
+
+/* Hide Streamlit's default decoration */
+#MainMenu {
+    visibility: hidden;
+}
+
+footer {
+    visibility: hidden;
+}
+
+/* Keep the header clean and light */
+[data-testid="stHeader"] {
+    background: rgba(255, 253, 251, 0.75);
+}
+
+/* Smooth scrolling and transitions */
+html {
+    scroll-behavior: smooth;
+}
+
+.stMarkdown, .stPlotlyChart, [data-testid="stImage"] {
+    animation: softAppear 0.35s ease-out;
+}
+
+@keyframes softAppear {
+    from {
+        opacity: 0.65;
+        transform: translateY(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+    .block-container {
+        padding: 1.3rem 1rem 2rem;
+    }
+
+    h1 {
+        font-size: 2rem !important;
+    }
+
+    .stButton > button,
+    .stDownloadButton > button {
+        width: 100%;
+    }
+}
